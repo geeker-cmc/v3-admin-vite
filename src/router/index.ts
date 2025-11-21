@@ -70,7 +70,8 @@ export const constantRoutes: RouteRecordRaw[] = [
     redirect: "/industry-analyze/planning",
     meta: {
       title: "产业研判",
-      elIcon: "TrendCharts"
+      elIcon: "TrendCharts",
+      keepAlive: true
     },
     children: [
       {

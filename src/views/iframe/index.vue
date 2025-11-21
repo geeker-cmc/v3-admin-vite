@@ -26,72 +26,28 @@ watch(
 
 onMounted(() => {
   if (!iframeUrl.value) {
-    console.warn("未配置 iframeUrl")
     loading.value = false
   }
 })
 </script>
 
 <template>
-  <div class="app-container">
+  <div class="relative w-full h-full overflow-hidden p-20px">
     <!-- Loading 状态 -->
-    <div v-show="loading" class="loading-mask">
-      <el-icon class="is-loading">
+    <div v-show="loading" class="absolute inset-0 flex flex-col items-center justify-center bg-white z-10">
+      <el-icon class="is-loading text-32px mb-12px">
         <Loading />
       </el-icon>
-      <span>加载中...</span>
+      <span class="text-14px text-#666">加载中...</span>
     </div>
-
-    <!-- iframe -->
     <iframe
       v-if="iframeUrl"
       ref="iframeRef"
       :src="iframeUrl"
       frameborder="0"
-      class="iframe-content"
+      class="w-full h-full border-none"
       @load="handleLoad"
     />
-
-    <!-- 未配置 URL 提示 -->
     <el-empty v-else description="未配置页面地址" />
   </div>
 </template>
-
-<style lang="scss" scoped>
-.iframe-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.loading-mask {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #fff;
-  z-index: 10;
-
-  .el-icon {
-    font-size: 32px;
-    margin-bottom: 12px;
-  }
-
-  span {
-    font-size: 14px;
-    color: #666;
-  }
-}
-
-.iframe-content {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-</style>
