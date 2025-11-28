@@ -1,5 +1,5 @@
 <template>
-  <el-popover placement="bottom" :width="300" trigger="click" popper-class="area-select-popover">
+  <el-popover ref="popoverRef" placement="bottom" :width="300" trigger="click" popper-class="area-select-popover">
     <template #reference>
       <div class="inline-flex items-center gap-2 px-4 py-2 cursor-pointer rounded transition-all">
         <el-icon class="text-18px text-[var(--el-color-primary)]">
@@ -60,7 +60,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from "vue"
+import { ref, computed, onMounted } from "vue"
 import { Location, ArrowRight } from "@element-plus/icons-vue"
 
 interface Area {
@@ -132,16 +132,114 @@ const provinces = ref<Province[]>([
   }
 ])
 
+// popover 引用
+const popoverRef = ref()
 // 当前选中的区域编码
 const selectedCode = ref<string>()
 // 当前选中的区域名称
 const selectedName = ref<string>()
 // 展开的省份集合
 const expandedProvinces = ref<Set<string>>(new Set())
+// 当前定位信息
+const currentLocation = ref<string>("")
 
 // 显示的区域文本
 const selectedArea = computed(() => {
   return selectedName.value || "请选择省市"
+})
+
+// 通过高德逆地理编码获取城市信息
+const getCityByCoords = async (longitude: number, latitude: number) => {
+  try {
+    const url = `https://restapi.amap.com/v3/geocode/regeo?key=275dfba143069f6b9f91d244e38b55d8&location=${longitude},${latitude}`
+    console.log("🔗 调用高德逆地理编码:", url)
+
+    const response = await fetch(url)
+    const data = await response.json()
+
+    console.log("收到高德逆地理编码响应:", data)
+
+    if (data.status === "1" && data.regeocode) {
+      const addressComponent = data.regeocode.addressComponent
+      const province = addressComponent.province
+      const city = addressComponent.city || province
+      const district = addressComponent.district
+
+      console.log("📍 逆地理编码成功:")
+      console.log({
+        省份: province,
+        城市: city,
+        区县: district,
+        完整地址: data.regeocode.formatted_address
+      })
+
+      currentLocation.value = `${province} ${city}`
+      return { province, city, district }
+    } else {
+      console.error("❌ 逆地理编码失败:", data.info || data.infocode)
+      currentLocation.value = "逆地理编码失败"
+    }
+  } catch (error) {
+    console.error("❌ 逆地理编码异常:", error)
+    currentLocation.value = "逆地理编码异常"
+  }
+}
+
+// 获取当前位置并转换为城市信息
+const getCityByIP = () => {
+  console.log("🚀 开始获取浏览器定位...")
+
+  if (!navigator.geolocation) {
+    console.error("❌ 浏览器不支持定位功能")
+    currentLocation.value = "浏览器不支持定位"
+    return
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    async (position) => {
+      const { latitude, longitude, accuracy } = position.coords
+
+      console.log("📍 浏览器定位成功:")
+      console.log({
+        经度: longitude.toFixed(6),
+        纬度: latitude.toFixed(6),
+        精度: `${accuracy.toFixed(0)}米`,
+        时间: new Date(position.timestamp).toLocaleString()
+      })
+
+      // 调用高德逆地理编码获取城市信息
+      await getCityByCoords(+longitude.toFixed(6), +latitude.toFixed(6))
+    },
+    (error) => {
+      console.log("定位失败", error)
+      let errorMsg = ""
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          errorMsg = "用户拒绝了定位请求"
+          break
+        case error.POSITION_UNAVAILABLE:
+          errorMsg = "位置信息不可用"
+          break
+        case error.TIMEOUT:
+          errorMsg = "定位请求超时"
+          break
+        default:
+          errorMsg = "未知错误"
+      }
+      console.error("❌ 浏览器定位失败:", errorMsg, error)
+      currentLocation.value = `定位失败: ${errorMsg}`
+    },
+    {
+      enableHighAccuracy: true, // 启用高精度
+      timeout: 10000, // 10秒超时
+      maximumAge: 0 // 不使用缓存
+    }
+  )
+}
+
+// 组件挂载时获取定位
+onMounted(() => {
+  getCityByIP()
 })
 
 // 切换省份展开/收起
@@ -157,6 +255,10 @@ const toggleProvince = (provinceCode: string) => {
 const handleSelect = (code: string, name: string) => {
   selectedCode.value = code
   selectedName.value = name
+  // 关闭 popover
+  if (popoverRef.value) {
+    popoverRef.value.hide()
+  }
   // 触发事件通知父组件
   emit("change", {
     code,
