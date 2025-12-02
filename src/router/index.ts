@@ -349,13 +349,53 @@ export const constantRoutes: RouteRecordRaw[] = [
       },
       {
         path: "famous-enterprise",
-        component: () => import("@/views/iframe/index.vue"),
-        name: "InvestmentModelFamousEnterprise",
+        component: () => import("@/views/parent-page/index.vue"),
+        redirect: "/investment-model/famous-enterprise/world-500",
         meta: {
-          title: "名企榜单招商",
-          iframeUrl: iframeUrl,
-          keepAlive: true
-        }
+          title: "名企榜单招商"
+        },
+        children: [
+          {
+            path: "world-500",
+            component: () => import("@/views/iframe/index.vue"),
+            name: "InvestmentModelFamousEnterpriseWorld500",
+            meta: {
+              title: "世界500强",
+              iframeUrl: iframeUrl,
+              keepAlive: true
+            }
+          },
+          {
+            path: "china-500",
+            component: () => import("@/views/iframe/index.vue"),
+            name: "InvestmentModelFamousEnterpriseChina500",
+            meta: {
+              title: "中国500强",
+              iframeUrl: iframeUrl,
+              keepAlive: true
+            }
+          },
+          {
+            path: "china-private-500",
+            component: () => import("@/views/iframe/index.vue"),
+            name: "InvestmentModelFamousEnterpriseChinaPrivate500",
+            meta: {
+              title: "中国民企500强",
+              iframeUrl: iframeUrl,
+              keepAlive: true
+            }
+          },
+          {
+            path: "china-innovation-100",
+            component: () => import("@/views/iframe/index.vue"),
+            name: "InvestmentModelFamousEnterpriseChinaInnovation100",
+            meta: {
+              title: "中国创新100强",
+              iframeUrl: iframeUrl,
+              keepAlive: true
+            }
+          }
+        ]
       },
       {
         path: "leading-enterprise",
@@ -399,13 +439,33 @@ export const constantRoutes: RouteRecordRaw[] = [
       },
       {
         path: "chain-master",
-        component: () => import("@/views/iframe/index.vue"),
-        name: "InvestmentModelChainMaster",
+        component: () => import("@/views/parent-page/index.vue"),
+        redirect: "/investment-model/chain-master/supporting",
         meta: {
-          title: "链主适配招商",
-          iframeUrl: iframeUrl,
-          keepAlive: true
-        }
+          title: "链主适配招商"
+        },
+        children: [
+          {
+            path: "supporting",
+            component: () => import("@/views/iframe/index.vue"),
+            name: "InvestmentModelChainMasterSupporting",
+            meta: {
+              title: "链主配套招商",
+              iframeUrl: iframeUrl,
+              keepAlive: true
+            }
+          },
+          {
+            path: "peer",
+            component: () => import("@/views/iframe/index.vue"),
+            name: "InvestmentModelChainMasterPeer",
+            meta: {
+              title: "链主同业招商",
+              iframeUrl: iframeUrl,
+              keepAlive: true
+            }
+          }
+        ]
       },
       {
         path: "park",
