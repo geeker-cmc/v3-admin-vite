@@ -4,11 +4,9 @@ import routeSettings from "@/config/route"
 
 const Layouts = () => import("@/layouts/index.vue")
 
-const iframeUrl = "https://chainbrain.chinascope.com"
-
 /**
  * 常驻路由
- * 除了 redirect/403/404/login 等隐藏页面，其他页面建议设置 Name 属性
+ * 除了 redirect/403/404/login 等隐藏页面,其他页面建议设置 Name 属性
  */
 export const constantRoutes: RouteRecordRaw[] = [
   {
@@ -64,38 +62,38 @@ export const constantRoutes: RouteRecordRaw[] = [
       }
     ]
   },
-  {
-    path: "/industry-analyze",
-    component: Layouts,
-    redirect: "/industry-analyze/planning",
-    meta: {
-      title: "产业研判",
-      elIcon: "TrendCharts",
-      keepAlive: true
-    },
-    children: [
-      {
-        path: "planning",
-        component: () => import("@/views/iframe/index.vue"),
-        name: "IndustryPlanning",
-        meta: {
-          title: "十五五规划产业",
-          iframeUrl: iframeUrl,
-          keepAlive: true
-        }
-      },
-      {
-        path: "emerging",
-        component: () => import("@/views/iframe/index.vue"),
-        name: "IndustryEmerging",
-        meta: {
-          title: "新兴产业",
-          iframeUrl: iframeUrl,
-          keepAlive: true
-        }
-      }
-    ]
-  },
+  // {
+  //   path: "/industry-analyze",
+  //   component: Layouts,
+  //   redirect: "/industry-analyze/planning",
+  //   meta: {
+  //     title: "产业研判",
+  //     elIcon: "TrendCharts",
+  //     keepAlive: true
+  //   },
+  //   children: [
+  //     {
+  //       path: "planning",
+  //       component: () => import("@/views/iframe/index.vue"),
+  //       name: "IndustryPlanning",
+  //       meta: {
+  //         title: "十五五规划产业",
+  //         iframeUrl: iframeUrl,
+  //         keepAlive: true
+  //       }
+  //     },
+  //     {
+  //       path: "emerging",
+  //       component: () => import("@/views/iframe/index.vue"),
+  //       name: "IndustryEmerging",
+  //       meta: {
+  //         title: "新兴产业",
+  //         iframeUrl: iframeUrl,
+  //         keepAlive: true
+  //       }
+  //     }
+  //   ]
+  // },
   {
     path: "/industry-map",
     component: Layouts,
@@ -111,7 +109,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "IndustryMapCountry",
         meta: {
           title: "全国图谱",
-          iframeUrl: iframeUrl,
+          page: "/cyfx/industry-chart/industry-panorama",
           keepAlive: true
         }
       },
@@ -121,7 +119,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "IndustryMapRegion",
         meta: {
           title: "区域图谱",
-          iframeUrl: iframeUrl,
+          page: "/cyfx/industry-chart/industry-area",
           keepAlive: true
         }
       }
@@ -142,7 +140,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "CompetitionIndustryChain",
         meta: {
           title: "产业链地图",
-          iframeUrl: iframeUrl,
+          page: "/cyfx/industry-map/industry-chain",
           keepAlive: true
         }
       },
@@ -152,7 +150,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "CompetitionSupplyChain",
         meta: {
           title: "供应链地图",
-          iframeUrl: iframeUrl,
+          page: "/cyfx/industry-map/supply-chain",
           keepAlive: true
         }
       },
@@ -162,7 +160,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "CompetitionTechnologyChain",
         meta: {
           title: "技术链地图",
-          iframeUrl: iframeUrl,
+          page: "/cyfx/industry-map/technology-chain",
           keepAlive: true
         }
       },
@@ -172,7 +170,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "CompetitionSalesChain",
         meta: {
           title: "销售链地图",
-          iframeUrl: iframeUrl,
+          page: "/cyfx/industry-map/sales-chain",
           keepAlive: true
         }
       }
@@ -193,7 +191,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "RegionalComparisonIndustry",
         meta: {
           title: "产业对比分析",
-          iframeUrl: iframeUrl,
+          page: "/cyfx/benchmarking-area/industry-contrast",
           keepAlive: true
         }
       },
@@ -203,7 +201,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "RegionalComparisonAdvantage",
         meta: {
           title: "产业占比分析",
-          iframeUrl: iframeUrl,
+          page: "/cyfx/benchmarking-area/industry-rate",
           keepAlive: true
         }
       }
@@ -220,7 +218,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "ParkList",
         meta: {
           title: "园区榜单",
-          iframeUrl: iframeUrl,
+          page: "/cyfx/park-map/park-hot",
           keepAlive: true,
           elIcon: "Medal"
         }
@@ -242,7 +240,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "OperationIndustryOverview",
         meta: {
           title: "产业总览",
-          iframeUrl: iframeUrl,
+          page: "/cyfx/operation-analysis/industry-overview",
           keepAlive: true
         }
       },
@@ -252,7 +250,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "OperationEnterpriseLayout",
         meta: {
           title: "企业布局",
-          iframeUrl: iframeUrl,
+          page: "/cyfx/operation-analysis/enterprise-layout",
           keepAlive: true
         }
       },
@@ -262,7 +260,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "OperationIndustryChainEvaluation",
         meta: {
           title: "产业链整体评价",
-          iframeUrl: iframeUrl,
+          page: "/cyfx/operation-analysis/industry-evaluate",
           keepAlive: true
         }
       },
@@ -272,7 +270,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "OperationIndustryChainAnalysis",
         meta: {
           title: "产业链载体分析",
-          iframeUrl: iframeUrl,
+          page: "/cyfx/operation-analysis/industry-carrier-analyse",
           keepAlive: true
         }
       },
@@ -282,7 +280,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "OperationIndustryChainStrength",
         meta: {
           title: "产业链强弱分析",
-          iframeUrl: iframeUrl,
+          page: "/cyfx/operation-analysis/industry-depend",
           keepAlive: true
         }
       }
@@ -303,7 +301,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "InvestmentModelIndustryChain",
         meta: {
           title: "产业链招商",
-          iframeUrl: iframeUrl,
+          page: "/jzzs/industry-chain",
           keepAlive: true
         }
       },
@@ -313,7 +311,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "InvestmentModelIndustryMap",
         meta: {
           title: "产业地图招商",
-          iframeUrl: iframeUrl,
+          page: "/jzzs/cydt",
           keepAlive: true
         }
       },
@@ -323,7 +321,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "InvestmentModelStrongChain",
         meta: {
           title: "强延补链招商",
-          iframeUrl: iframeUrl,
+          page: "/jzzs/ses-chain",
           keepAlive: true
         }
       },
@@ -333,7 +331,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "InvestmentModelRelatedChain",
         meta: {
           title: "关系链招商",
-          iframeUrl: iframeUrl,
+          page: "/jzzs/relation-chain",
           keepAlive: true
         }
       },
@@ -343,7 +341,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "InvestmentModelSimilar",
         meta: {
           title: "以商招商",
-          iframeUrl: iframeUrl,
+          page: "/jzzs/local-support",
           keepAlive: true
         }
       },
@@ -361,7 +359,7 @@ export const constantRoutes: RouteRecordRaw[] = [
             name: "InvestmentModelFamousEnterpriseWorld500",
             meta: {
               title: "世界500强",
-              iframeUrl: iframeUrl,
+              page: "/jzzs/famous/top500-42",
               keepAlive: true
             }
           },
@@ -371,7 +369,7 @@ export const constantRoutes: RouteRecordRaw[] = [
             name: "InvestmentModelFamousEnterpriseChina500",
             meta: {
               title: "中国500强",
-              iframeUrl: iframeUrl,
+              page: "/jzzs/famous/top500-45",
               keepAlive: true
             }
           },
@@ -381,7 +379,7 @@ export const constantRoutes: RouteRecordRaw[] = [
             name: "InvestmentModelFamousEnterpriseChinaPrivate500",
             meta: {
               title: "中国民企500强",
-              iframeUrl: iframeUrl,
+              page: "/jzzs/famous/top500-47",
               keepAlive: true
             }
           },
@@ -391,7 +389,7 @@ export const constantRoutes: RouteRecordRaw[] = [
             name: "InvestmentModelFamousEnterpriseChinaInnovation100",
             meta: {
               title: "中国创新100强",
-              iframeUrl: iframeUrl,
+              page: "/jzzs/famous/top500-66",
               keepAlive: true
             }
           }
@@ -403,7 +401,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "InvestmentModelLeadingEnterprise",
         meta: {
           title: "龙头骨干招商",
-          iframeUrl: iframeUrl,
+          page: "/jzzs/inventory/faucet",
           keepAlive: true
         }
       },
@@ -413,7 +411,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "InvestmentModelQualifiedEnterprise",
         meta: {
           title: "资质企业招商",
-          iframeUrl: iframeUrl,
+          page: "/jzzs/inventory/leading",
           keepAlive: true
         }
       },
@@ -423,7 +421,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "InvestmentModelInvestmentFund",
         meta: {
           title: "投行基金招商",
-          iframeUrl: iframeUrl,
+          page: "/jzzs/inventory/ib",
           keepAlive: true
         }
       },
@@ -433,7 +431,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "InvestmentModelResearchInstitute",
         meta: {
           title: "科研机构招商",
-          iframeUrl: iframeUrl,
+          page: "/jzzs/inventory/organization",
           keepAlive: true
         }
       },
@@ -451,7 +449,7 @@ export const constantRoutes: RouteRecordRaw[] = [
             name: "InvestmentModelChainMasterSupporting",
             meta: {
               title: "链主配套招商",
-              iframeUrl: iframeUrl,
+              page: "/jzzs/area-chain/faucet-matching",
               keepAlive: true
             }
           },
@@ -461,7 +459,7 @@ export const constantRoutes: RouteRecordRaw[] = [
             name: "InvestmentModelChainMasterPeer",
             meta: {
               title: "链主同业招商",
-              iframeUrl: iframeUrl,
+              page: "/jzzs/area-chain/faucet-analogy",
               keepAlive: true
             }
           }
@@ -473,7 +471,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "InvestmentModelPark",
         meta: {
           title: "园区招商",
-          iframeUrl: iframeUrl,
+          page: "/jzzs/park",
           keepAlive: true
         }
       }
@@ -494,7 +492,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "EnterprisePortraitOverview",
         meta: {
           title: "企业总览",
-          iframeUrl: iframeUrl,
+          page: "/qyjc/enterprise-overview",
           keepAlive: true
         }
       },
@@ -504,7 +502,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "EnterprisePortraitMonitoring",
         meta: {
           title: "企业监测",
-          iframeUrl: iframeUrl,
+          page: "/qyjc/enterprise-monitoring",
           keepAlive: true
         }
       },
@@ -514,7 +512,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "EnterprisePortraitList",
         meta: {
           title: "企业榜单",
-          iframeUrl: iframeUrl,
+          page: "/qyjc/company-hot",
           keepAlive: true
         }
       },
@@ -524,7 +522,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "EnterprisePortraitSelector",
         meta: {
           title: "企业筛选器",
-          iframeUrl: iframeUrl,
+          page: "/qyjc/enterprise-filter",
           keepAlive: true
         }
       },
@@ -534,7 +532,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "EnterprisePortraitDetail",
         meta: {
           title: "企业画像",
-          iframeUrl: iframeUrl,
+          page: "/qyjc/archives-home",
           keepAlive: true
         }
       },
@@ -544,7 +542,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "EnterprisePortraitEvaluation",
         meta: {
           title: "企业综合评价",
-          iframeUrl: iframeUrl,
+          page: "/qyjc/synthesis",
           keepAlive: true
         }
       }
@@ -565,7 +563,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "ForecastMonitoringIndustry",
         meta: {
           title: "产业发展预警",
-          iframeUrl: iframeUrl,
+          page: "/cydt/risk-warning/industry-dev-warning",
           keepAlive: true
         }
       },
@@ -575,7 +573,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "ForecastMonitoringEnterprise",
         meta: {
           title: "企业外迁预警",
-          iframeUrl: iframeUrl,
+          page: "/cydt/risk-warning/out-migration-warning",
           keepAlive: true
         }
       }
@@ -596,7 +594,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "IntelligenceDynamicsNews",
         meta: {
           title: "资讯热点",
-          iframeUrl: iframeUrl,
+          page: "/cydt/industry-news",
           keepAlive: true
         }
       },
@@ -606,7 +604,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: "IntelligenceDynamicsPolicy",
         meta: {
           title: "政策规划",
-          iframeUrl: iframeUrl,
+          page: "/cydt/industry-policy",
           keepAlive: true
         }
       }

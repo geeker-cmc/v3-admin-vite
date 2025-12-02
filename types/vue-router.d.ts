@@ -49,8 +49,8 @@ declare module "vue-router" {
      */
     keepAlive?: boolean
     /**
-     * 该路由跳转时加载的 iframe 地址
+     * 该路由跳转时加载的 iframe的参数
      */
-    iframeUrl?: string
+    page?: string
   }
 }

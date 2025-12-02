@@ -6,9 +6,13 @@ const route = useRoute()
 const iframeRef = ref<HTMLIFrameElement>()
 const loading = ref(true)
 
+/** 基础 URL */
+const baseUrl = "https://gtcom-chainbrain.istari.cn/#/embed/region"
+
 /** 从路由 meta 中获取 iframe URL */
 const iframeUrl = computed(() => {
-  return (route.meta.iframeUrl as string) || ""
+  const page = route.meta.page as string
+  return page ? `${baseUrl}?page=${encodeURIComponent(page)}` : ""
 })
 
 /** iframe 加载完成 */
