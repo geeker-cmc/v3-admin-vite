@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from "vue"
 import { useRoute } from "vue-router"
+import { createCSFTokenApi } from "@/api/login"
 
 const route = useRoute()
 const iframeRef = ref<HTMLIFrameElement>()
 const loading = ref(true)
+const clientInfo = ref<string>("")
 
 /** 基础 URL */
 const baseUrl = "https://gtcom-chainbrain.istari.cn/#/embed/region"
@@ -12,8 +14,26 @@ const baseUrl = "https://gtcom-chainbrain.istari.cn/#/embed/region"
 /** 从路由 meta 中获取 iframe URL */
 const iframeUrl = computed(() => {
   const page = route.meta.page as string
-  return page ? `${baseUrl}?page=${encodeURIComponent(page)}` : ""
+  if (!page || !clientInfo.value) return ""
+
+  const url = `${baseUrl}?page=${page}&clientInfo=${clientInfo.value}&clientId=gtcom-chainbrain-prod&region=CSF_CN_110000`
+  console.log("最终的 iframeUrl:", url)
+  return url
 })
+
+/** 获取 clientInfo */
+const fetchClientInfo = async () => {
+  try {
+    const response = await createCSFTokenApi()
+    console.log("获取到的 clientInfo:", response)
+    if (response?.data) {
+      clientInfo.value = response.data
+    }
+  } catch (error) {
+    console.error("获取 clientInfo 失败:", error)
+    loading.value = false
+  }
+}
 
 /** iframe 加载完成 */
 const handleLoad = () => {
@@ -28,7 +48,8 @@ watch(
   }
 )
 
-onMounted(() => {
+onMounted(async () => {
+  await fetchClientInfo()
   if (!iframeUrl.value) {
     loading.value = false
   }

@@ -3,9 +3,9 @@ import { pinia } from "@/store"
 import { defineStore } from "pinia"
 import { useTagsViewStore } from "./tags-view"
 import { useSettingsStore } from "./settings"
-import { getToken, removeToken, setToken } from "@/utils/cache/cookies"
+import { getToken, removeToken, setToken, getUserName, setUserName, removeUserName } from "@/utils/cache/cookies"
 import { resetRouter } from "@/router"
-import { loginApi, getUserInfoApi } from "@/api/login"
+import { loginApi } from "@/api/login"
 import { type LoginRequestData } from "@/api/login/types/login"
 import routeSettings from "@/config/route"
 
@@ -18,17 +18,24 @@ export const useUserStore = defineStore("user", () => {
   const settingsStore = useSettingsStore()
 
   /** 登录 */
-  const login = async ({ username, password, code }: LoginRequestData) => {
-    const { data } = await loginApi({ username, password, code })
-    setToken(data.token)
-    token.value = data.token
+  const login = async ({ username: _username, password }: LoginRequestData) => {
+    try {
+      const { data } = await loginApi({ username: _username, password })
+      setToken(data.accessToken)
+      setUserName(data.username)
+      username.value = data.username
+      token.value = data.accessToken
+    } catch (error) {
+      console.log("登录失败", error)
+    }
   }
   /** 获取用户详情 */
   const getInfo = async () => {
-    const { data } = await getUserInfoApi()
-    username.value = data.username
-    // 验证返回的 roles 是否为一个非空数组，否则塞入一个没有任何作用的默认角色，防止路由守卫逻辑进入无限循环
-    roles.value = data.roles?.length > 0 ? data.roles : routeSettings.defaultRoles
+    if (getUserName()) {
+      username.value = getUserName() || ""
+      // 验证返回的 roles 是否为一个非空数组，否则塞入一个没有任何作用的默认角色，防止路由守卫逻辑进入无限循环
+      roles.value = routeSettings.defaultRoles
+    }
   }
   /** 模拟角色变化 */
   const changeRoles = async (role: string) => {
@@ -41,6 +48,7 @@ export const useUserStore = defineStore("user", () => {
   /** 登出 */
   const logout = () => {
     removeToken()
+    removeUserName()
     token.value = ""
     roles.value = []
     resetRouter()

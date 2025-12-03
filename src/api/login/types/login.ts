@@ -1,10 +1,8 @@
 export interface LoginRequestData {
   /** admin 或 editor */
-  username: "admin" | "editor"
+  username: string
   /** 密码 */
   password: string
-  /** 验证码 */
-  code: string
 }
 
 export interface RegisterRequestData {
@@ -18,6 +16,8 @@ export interface RegisterRequestData {
 
 export type LoginCodeResponseData = ApiResponseData<string>
 
-export type LoginResponseData = ApiResponseData<{ token: string }>
+export type LoginResponseData = ApiResponseData<{ accessToken: string; refreshToken: string; username: string }>
 
 export type UserInfoResponseData = ApiResponseData<{ username: string; roles: string[] }>
+
+export type CSFTokenResponseData = ApiResponseData<string>

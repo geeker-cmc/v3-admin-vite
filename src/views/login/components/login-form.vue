@@ -34,9 +34,9 @@
       >
     </div>
 
-    <div>
+    <!-- <div>
       <el-button class="w-full mt-18px" size="large" @click.prevent="toRegister">注 册</el-button>
-    </div>
+    </div> -->
   </el-form>
 </template>
 
@@ -60,15 +60,14 @@ const loading = ref(false)
 /** 登录表单数据 */
 const loginFormData: LoginRequestData = reactive({
   username: "admin",
-  password: "12345678",
-  code: ""
+  password: "123456"
 })
 /** 登录表单校验规则 */
 const loginFormRules: FormRules = {
   username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
   password: [
     { required: true, message: "请输入密码", trigger: "blur" },
-    { min: 8, max: 16, message: "长度在 8 到 16 个字符", trigger: "blur" }
+    { min: 6, max: 16, message: "长度在 6 到 16 个字符", trigger: "blur" }
   ]
 }
 /** 登录逻辑 */
