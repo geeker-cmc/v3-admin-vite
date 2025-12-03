@@ -464,16 +464,6 @@ export const constantRoutes: RouteRecordRaw[] = [
             }
           }
         ]
-      },
-      {
-        path: "park",
-        component: () => import("@/views/iframe/index.vue"),
-        name: "InvestmentModelPark",
-        meta: {
-          title: "园区招商",
-          page: "/jzzs/park",
-          keepAlive: true
-        }
       }
     ]
   },
