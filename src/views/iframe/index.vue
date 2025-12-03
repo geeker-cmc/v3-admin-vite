@@ -15,7 +15,6 @@ const baseUrl = "https://gtcom-chainbrain.istari.cn/#/embed/region"
 const iframeUrl = computed(() => {
   const page = route.meta.page as string
   if (!page || !clientInfo.value) return ""
-
   const url = `${baseUrl}?page=${page}&clientInfo=${clientInfo.value}&clientId=gtcom-chainbrain-prod&region=CSF_CN_110000`
   console.log("最终的 iframeUrl:", url)
   return url
