@@ -24,7 +24,7 @@ const { isTop } = useLayoutMode()
       <router-link v-else key="expand" to="/">
         <div class="layout-logo-text">
           <img :src="logo" class="h-32px" />
-          <span class="color-[#fff] ml-10px font-bold">Compass</span>
+          <span class="color-[#fff] ml-10px font-bold">新译科技</span>
         </div>
       </router-link>
     </transition>

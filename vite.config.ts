@@ -35,7 +35,7 @@ export default ({ mode }: ConfigEnv): UserConfigExport => {
       /** 接口代理 */
       proxy: {
         "/test-api": {
-          target: "http://49.232.0.120:9527/",
+          target: "https://compass-api.raycoding.com/",
           ws: true,
           /** 是否允许跨域 */
           changeOrigin: true,

@@ -5,7 +5,7 @@
         <div class="left flex-1 bg-gray-500 bg-opacity-20 relative p-30px lt-xl:hidden">
           <div class="flex items-center relative text-white">
             <img src="@/assets/layouts/logo.png" alt="" class="w-48px h-48px mr-10px" />
-            <span class="text-20px font-bold">Compass</span>
+            <span class="text-20px font-bold">新译科技</span>
           </div>
           <div class="flex justify-center items-center h-[calc(100%-60px)]">
             <TransitionGroup appear tag="div" enter-active-class="animate__animated animate__bounceInLeft">
@@ -18,7 +18,7 @@
           <div class="flex justify-between items-center text-white at-2xl:justify-end at-xl:justify-end">
             <div class="flex items-center at-2xl:hidden at-xl:hidden">
               <img src="@/assets/layouts/logo.png" alt="" class="w-48px h-48px mr-10px" />
-              <span class="text-20px font-bold">Compass</span>
+              <span class="text-20px font-bold">新译科技</span>
             </div>
 
             <div class="flex justify-end items-center space-x-10px">

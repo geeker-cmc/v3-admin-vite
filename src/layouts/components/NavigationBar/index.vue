@@ -4,7 +4,7 @@ import { storeToRefs } from "pinia"
 import { useAppStore } from "@/store/modules/app"
 import { useSettingsStore } from "@/store/modules/settings"
 import { useUserStore } from "@/store/modules/user"
-import { UserFilled } from "@element-plus/icons-vue"
+import { UserFilled, MagicStick } from "@element-plus/icons-vue"
 import Hamburger from "../Hamburger/index.vue"
 import Breadcrumb from "../Breadcrumb/index.vue"
 import Sidebar from "../Sidebar/index.vue"
@@ -34,6 +34,11 @@ const logout = () => {
   userStore.logout()
   router.push("/login")
 }
+
+/** 跳转到智能对话 */
+// const goToChat = () => {
+//   router.push("/chat")
+// }
 </script>
 
 <template>
@@ -51,6 +56,14 @@ const logout = () => {
       <Screenfull v-if="showScreenfull" class="right-menu-item" />
       <ThemeSwitch v-if="showThemeSwitch" class="right-menu-item" />
       <Notify v-if="showNotify" class="right-menu-item" />
+      <!-- 智能对话按钮 -->
+      <!-- <el-tooltip content="AI 智能助手" placement="bottom">
+        <div class="right-menu-item" @click="goToChat">
+          <el-icon :size="22">
+            <MagicStick />
+          </el-icon>
+        </div>
+      </el-tooltip> -->
       <!-- <AreaSelect /> -->
       <el-dropdown class="right-menu-item">
         <div class="right-menu-avatar">

@@ -9,7 +9,7 @@ const loading = ref(true)
 const clientInfo = ref<string>("")
 
 /** 基础 URL */
-const baseUrl = "https://gtcom.raycoding.com/#/embed/region"
+const baseUrl = "https://compass-web.raycoding.com/#/embed/region"
 
 /** 从路由 meta 中获取 iframe URL */
 const iframeUrl = computed(() => {
