@@ -23,6 +23,7 @@ const appStore = useAppStore()
 const userStore = useUserStore()
 const settingsStore = useSettingsStore()
 const { showNotify, showThemeSwitch, showScreenfull, showSearchMenu } = storeToRefs(settingsStore)
+const { isExternalLogin } = storeToRefs(appStore)
 
 /** 切换侧边栏 */
 const toggleSidebar = () => {
@@ -78,7 +79,8 @@ const logout = () => {
             <a target="_blank" href="https://gitee.com/un-pany/v3-admin-vite">
               <el-dropdown-item>Gitee</el-dropdown-item>
             </a> -->
-            <el-dropdown-item @click="logout">
+            <!-- 外部登录时隐藏退出登录按钮 -->
+            <el-dropdown-item v-if="!isExternalLogin" @click="logout">
               <span style="display: block">退出登录</span>
             </el-dropdown-item>
           </el-dropdown-menu>

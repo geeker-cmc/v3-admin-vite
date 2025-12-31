@@ -22,6 +22,8 @@ export const useAppStore = defineStore("app", () => {
   })
   /** 设备类型 */
   const device = ref<DeviceEnum>(DeviceEnum.Desktop)
+  /** 是否从外部登录进入 */
+  const isExternalLogin = ref<boolean>(false)
 
   /** 监听侧边栏 opened 状态 */
   watch(
@@ -43,8 +45,12 @@ export const useAppStore = defineStore("app", () => {
   const toggleDevice = (value: DeviceEnum) => {
     device.value = value
   }
+  /** 设置外部登录状态 */
+  const setExternalLogin = (value: boolean) => {
+    isExternalLogin.value = value
+  }
 
-  return { device, sidebar, toggleSidebar, closeSidebar, toggleDevice }
+  return { device, sidebar, isExternalLogin, toggleSidebar, closeSidebar, toggleDevice, setExternalLogin }
 })
 
 /**

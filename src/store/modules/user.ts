@@ -29,6 +29,14 @@ export const useUserStore = defineStore("user", () => {
       console.log("登录失败", error)
     }
   }
+
+  const externalLogin = (_token: string, userName: string) => {
+    setToken(_token)
+    setUserName(userName)
+    username.value = userName
+    token.value = _token
+  }
+
   /** 获取用户详情 */
   const getInfo = async () => {
     if (getUserName()) {
@@ -68,7 +76,7 @@ export const useUserStore = defineStore("user", () => {
     }
   }
 
-  return { token, roles, username, login, getInfo, changeRoles, logout, resetToken }
+  return { token, roles, username, login, getInfo, changeRoles, logout, resetToken, externalLogin }
 })
 
 /**
