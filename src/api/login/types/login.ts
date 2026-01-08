@@ -16,7 +16,12 @@ export interface RegisterRequestData {
 
 export type LoginCodeResponseData = ApiResponseData<string>
 
-export type LoginResponseData = ApiResponseData<{ accessToken: string; refreshToken: string; username: string }>
+export type LoginResponseData = ApiResponseData<{
+  accessToken: string
+  refreshToken: string
+  username: string
+  userId: number
+}>
 
 export type UserInfoResponseData = ApiResponseData<{ username: string; roles: string[] }>
 

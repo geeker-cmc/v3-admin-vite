@@ -37,9 +37,9 @@ const logout = () => {
 }
 
 /** 跳转到智能对话 */
-// const goToChat = () => {
-//   router.push("/chat")
-// }
+const goToChat = () => {
+  router.push("/chat")
+}
 </script>
 
 <template>
@@ -58,13 +58,13 @@ const logout = () => {
       <ThemeSwitch v-if="showThemeSwitch" class="right-menu-item" />
       <Notify v-if="showNotify" class="right-menu-item" />
       <!-- 智能对话按钮 -->
-      <!-- <el-tooltip content="AI 智能助手" placement="bottom">
+      <el-tooltip content="AI 智能助手" placement="bottom">
         <div class="right-menu-item" @click="goToChat">
           <el-icon :size="22">
             <MagicStick />
           </el-icon>
         </div>
-      </el-tooltip> -->
+      </el-tooltip>
       <!-- <AreaSelect /> -->
       <el-dropdown class="right-menu-item">
         <div class="right-menu-avatar">

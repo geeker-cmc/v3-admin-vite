@@ -23,8 +23,6 @@ router.beforeEach(async (to, _from, next) => {
   // 新增：检测 URL 中的 token 和 userName 参数（第三方登录）
   const urlToken = to.query.token as string
   const urlUserName = to.query.userName as string
-  console.log("urlToken:", urlToken)
-  console.log("urlUserName:", urlUserName)
   if (urlToken && urlUserName) {
     // 对参数进行 decode（虽然 Vue Router 会自动 decode，但为了确保安全，手动再处理一次）
     const decodedToken = decodeURIComponent(urlToken)
@@ -67,6 +65,7 @@ router.beforeEach(async (to, _from, next) => {
 
   // 否则要重新获取权限角色
   try {
+    console.log("重新获取用户信息")
     await userStore.getInfo()
     // 注意：角色必须是一个数组！ 例如: ["admin"] 或 ["developer", "editor"]
     const roles = userStore.roles

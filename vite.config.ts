@@ -40,6 +40,13 @@ export default ({ mode }: ConfigEnv): UserConfigExport => {
           /** 是否允许跨域 */
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/test-api/, "")
+        },
+        "/chat-api": {
+          target: "https://api.dify.ai",
+          ws: true,
+          /** 是否允许跨域 */
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/chat-api/, "")
         }
       },
       /** 预热常用文件，提高初始页面加载速度 */

@@ -22,3 +22,12 @@ export const setUserName = (token: string) => {
 export const removeUserName = () => {
   Cookies.remove(CacheKey.USER_NAME)
 }
+export const setUserId = (userId: string) => {
+  Cookies.set(CacheKey.USER_ID, userId)
+}
+export const getUserId = () => {
+  return Cookies.get(CacheKey.USER_ID)
+}
+export const removeUserId = () => {
+  Cookies.remove(CacheKey.USER_ID)
+}

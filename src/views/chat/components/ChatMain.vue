@@ -26,7 +26,7 @@
             type="textarea"
             :rows="1"
             :autosize="{ minRows: 1, maxRows: 6 }"
-            placeholder="给 DeepSeek 发送消息"
+            placeholder="发送消息"
             class="custom-textarea"
             @keyup.enter.exact="handleSend"
           />
@@ -40,7 +40,7 @@
           </div>
         </div>
 
-        <div class="flex gap-8px md:gap-12px mt-12px px-0 md:px-16px flex-wrap">
+        <!-- <div class="flex gap-8px md:gap-12px mt-12px px-0 md:px-16px flex-wrap">
           <el-button
             text
             size="small"
@@ -57,7 +57,7 @@
             <el-icon><Connection /></el-icon>
             <span class="hidden sm:inline">联网搜索</span>
           </el-button>
-        </div>
+        </div> -->
       </div>
     </div>
   </main>

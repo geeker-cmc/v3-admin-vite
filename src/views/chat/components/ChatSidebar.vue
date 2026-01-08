@@ -14,7 +14,7 @@
       class="absolute top-16px left-16px flex flex-row items-center gap-8px px-12px py-8px bg-white rounded-12px shadow-[0_2px_12px_rgba(0,0,0,0.1)] z-1000 transition-all duration-300 hover:shadow-[0_4px_16px_rgba(0,0,0,0.15)]"
     >
       <img
-        src="@/assets/layouts/logo.png"
+        src="@/assets/layouts/logo1.png"
         alt="Compass Logo"
         class="w-32px h-32px object-contain cursor-pointer transition-transform duration-200 hover:scale-110 flex-shrink-0"
         @click="toggleSidebar"
@@ -49,7 +49,7 @@
       <!-- Logo 和品牌名 -->
       <div class="p-16px border-b border-[var(--el-border-color-lighter)] flex items-center justify-between">
         <div class="flex items-center gap-12px">
-          <img src="@/assets/layouts/logo.png" alt="Compass Logo" class="w-32px h-32px object-contain" />
+          <img src="@/assets/layouts/logo1.png" alt="Compass Logo" class="w-32px h-32px object-contain" />
           <span class="text-20px font-600 text-[#1f2937]">Compass</span>
         </div>
 
