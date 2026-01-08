@@ -42,7 +42,7 @@ export default ({ mode }: ConfigEnv): UserConfigExport => {
           rewrite: (path) => path.replace(/^\/test-api/, "")
         },
         "/chat-api": {
-          target: "https://api.dify.ai",
+          target: "http://101.42.13.77",
           ws: true,
           /** 是否允许跨域 */
           changeOrigin: true,
