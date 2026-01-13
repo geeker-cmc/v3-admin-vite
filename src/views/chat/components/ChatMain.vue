@@ -2,7 +2,7 @@
   <main class="flex-1 flex flex-col bg-white relative">
     <!-- 消息列表区域 -->
     <div v-if="messages.length > 0" class="flex-1 overflow-y-auto px-16px md:px-20px py-20px">
-      <div class="max-w-800px mx-auto w-full space-y-24px">
+      <div class="max-w-1000px mx-auto w-full space-y-24px">
         <div v-for="msg in messages" :key="msg.id" class="message-item" :class="msg.role">
           <!-- 用户消息 -->
           <div v-if="msg.role === 'user'" class="flex justify-end">
@@ -12,7 +12,7 @@
           </div>
 
           <!-- AI 消息 -->
-          <div v-else class="flex justify-start">
+          <div v-else-if="msg.content" class="flex justify-start">
             <div class="max-w-80%">
               <div class="flex items-start gap-12px">
                 <div
@@ -34,27 +34,20 @@
 
         <!-- 加载状态 -->
         <div v-if="isLoading && messages[messages.length - 1]?.content === ''" class="flex justify-start">
-          <div class="flex items-start gap-12px">
-            <div
-              class="w-32px h-32px rounded-full bg-[var(--el-color-primary)] flex items-center justify-center flex-shrink-0"
-            >
-              <img src="@/assets/layouts/logo.png" alt="AI" class="w-20px h-20px object-contain brightness-0 invert" />
-            </div>
-            <div class="bg-[#f7f8fa] rounded-12px px-16px py-12px">
-              <div class="flex gap-4px">
-                <span
-                  class="w-8px h-8px bg-[var(--el-color-primary)] rounded-full animate-bounce"
-                  style="animation-delay: 0s"
-                />
-                <span
-                  class="w-8px h-8px bg-[var(--el-color-primary)] rounded-full animate-bounce"
-                  style="animation-delay: 0.2s"
-                />
-                <span
-                  class="w-8px h-8px bg-[var(--el-color-primary)] rounded-full animate-bounce"
-                  style="animation-delay: 0.4s"
-                />
-              </div>
+          <div class="bg-[#f7f8fa] rounded-12px px-16px py-12px">
+            <div class="flex gap-4px">
+              <span
+                class="w-8px h-8px bg-[var(--el-color-primary)] rounded-full animate-bounce"
+                style="animation-delay: 0s"
+              />
+              <span
+                class="w-8px h-8px bg-[var(--el-color-primary)] rounded-full animate-bounce"
+                style="animation-delay: 0.2s"
+              />
+              <span
+                class="w-8px h-8px bg-[var(--el-color-primary)] rounded-full animate-bounce"
+                style="animation-delay: 0.4s"
+              />
             </div>
           </div>
         </div>
@@ -64,7 +57,7 @@
     <!-- 欢迎页面（空白状态） -->
     <div
       v-else
-      class="flex-1 flex flex-col items-center justify-center py-20px md:py-40px px-16px md:px-20px max-w-800px mx-auto w-full"
+      class="flex-1 flex flex-col items-center justify-center py-20px md:py-40px px-16px md:px-20px max-w-1000px mx-auto w-full"
     >
       <div class="text-center mb-40px md:mb-60px">
         <img
@@ -81,7 +74,7 @@
 
     <!-- 输入框区域（固定在底部） -->
     <div class="border-t border-[var(--el-border-color-lighter)] bg-white py-16px px-16px md:px-20px">
-      <div class="w-full max-w-800px mx-auto px-0 md:px-16px">
+      <div class="w-full max-w-1000px mx-auto px-0 md:px-16px">
         <div
           class="input-wrapper relative bg-[#f7f8fa] rounded-12px px-16px py-12px border border-[var(--el-border-color-lighter)] transition-all duration-300 focus-within:border-[var(--el-color-primary)] focus-within:shadow-[0_0_0_3px_var(--el-color-primary-light-9)]"
         >
