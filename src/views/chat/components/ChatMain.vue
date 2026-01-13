@@ -99,8 +99,6 @@
           <div
             class="flex items-center justify-end gap-8px mt-8px pt-8px border-t border-[var(--el-border-color-lighter)]"
           >
-            <el-button text :icon="Paperclip" title="添加附件" :disabled="isLoading" />
-            <el-button text :icon="Microphone" title="语音输入" :disabled="isLoading" />
             <el-button
               type="primary"
               circle
