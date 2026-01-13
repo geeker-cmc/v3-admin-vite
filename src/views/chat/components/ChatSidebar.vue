@@ -48,7 +48,7 @@
     <template v-if="isMobile || !isCollapsed">
       <!-- Logo 和品牌名 -->
       <div class="p-16px border-b border-[var(--el-border-color-lighter)] flex items-center justify-between">
-        <div class="flex items-center gap-12px">
+        <div class="flex items-center gap-12px cursor-pointer" @click="goToHome">
           <img src="@/assets/layouts/logo1.png" alt="Compass Logo" class="w-32px h-32px object-contain" />
           <span class="text-20px font-600 text-[#1f2937]">新译科技</span>
         </div>
@@ -139,6 +139,8 @@
 
 <script setup lang="ts">
 import { ref, nextTick } from "vue"
+import type { ComponentPublicInstance } from "vue"
+import { useRouter } from "vue-router"
 import { Plus, Expand, Fold, MoreFilled, Edit, Delete } from "@element-plus/icons-vue"
 import type { ConversationItem } from "@/api/chat/types"
 
@@ -157,6 +159,7 @@ withDefaults(defineProps<Props>(), {
 const isCollapsed = ref(false)
 const editingId = ref<string>("") // 正在编辑的会话ID
 const editingName = ref<string>("") // 编辑中的名称
+const router = useRouter()
 
 const emit = defineEmits<{
   newChat: []
@@ -173,6 +176,11 @@ const handleNewChat = () => {
   emit("newChat")
 }
 
+// 跳转到首页
+const goToHome = () => {
+  router.push("/")
+}
+
 // 开始编辑
 const startEditing = (conversation: ConversationItem) => {
   editingId.value = conversation.id
@@ -180,8 +188,8 @@ const startEditing = (conversation: ConversationItem) => {
 }
 
 // 输入框ref回调，自动聚焦
-const setInputRef = (el: HTMLInputElement | null) => {
-  if (el) {
+const setInputRef = (el: Element | ComponentPublicInstance | null) => {
+  if (el && el instanceof HTMLInputElement) {
     nextTick(() => {
       el.focus()
       // 将光标移到文本末尾
