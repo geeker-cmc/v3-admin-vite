@@ -138,7 +138,7 @@ const emit = defineEmits<{
 }>()
 
 // 配置 markdown-it
-const md = new MarkdownIt({
+const md: MarkdownIt = new MarkdownIt({
   html: false, // 禁用HTML标签以避免内容丢失
   linkify: true,
   typographer: true,
