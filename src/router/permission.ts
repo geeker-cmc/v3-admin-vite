@@ -23,21 +23,24 @@ router.beforeEach(async (to, _from, next) => {
   // 新增：检测 URL 中的 token 和 userName 参数（第三方登录）
   const urlToken = to.query.token as string
   const urlUserName = to.query.userName as string
-  if (urlToken && urlUserName) {
+  const urlUserId = to.query.userId as string
+  if (urlToken && urlUserName && urlUserId) {
     // 对参数进行 decode（虽然 Vue Router 会自动 decode，但为了确保安全，手动再处理一次）
     const decodedToken = decodeURIComponent(urlToken)
     const decodedUserName = decodeURIComponent(urlUserName)
+    const decodedUserId = Number(decodeURIComponent(urlUserId))
 
     // 设置外部登录状态
     appStore.setExternalLogin(true)
 
     // 调用外部登录方法
-    userStore.externalLogin(decodedToken, decodedUserName)
+    userStore.externalLogin(decodedToken, decodedUserName, decodedUserId)
 
     // 移除 URL 中的 token 和 userName 参数，避免刷新时重复处理
     const query = { ...to.query }
     delete query.token
     delete query.userName
+    delete query.userId
 
     // 重定向到首页，去掉 URL 参数
     // return next({

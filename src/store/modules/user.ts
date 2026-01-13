@@ -43,11 +43,13 @@ export const useUserStore = defineStore("user", () => {
     }
   }
 
-  const externalLogin = (_token: string, userName: string) => {
+  const externalLogin = (_token: string, userName: string, _userId: number) => {
     setToken(_token)
     setUserName(userName)
+    setUserId(`${_userId}`)
     username.value = userName
     token.value = _token
+    userId.value = _userId
   }
 
   /** 获取用户详情 */
